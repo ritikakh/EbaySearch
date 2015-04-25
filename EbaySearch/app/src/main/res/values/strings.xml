@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">EbaySearch</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ebay_search">eBay Search</string>
+    <string name="keyword">Keyword</string>
+    <string name="price_from">Price From</string>
+    <string name="price_to">Price To</string>
+    <string name="sort_by">Sort By</string>
+    <string-array name="sort_by_array">
+        <item>Best Match</item>
+        <item>Price : Highest First</item>
+        <item>Price + Shipping : Highest First</item>
+        <item>Price + Shipping : Lowest First</item>
+    </string-array>
+    <string name="best_match">Best Match</string>
+    <string name="clear">Clear</string>
+    <string name="search">Search</string>
+</resources>
