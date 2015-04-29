@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class Item implements Serializable{
     private String itemId, itemName, imageUrl, shipping, viewUrl, price;
+    private String itemCategory, buyingFormat, shippingType;
 
     public Item (JSONObject jsonObject) {
         itemName = jsonObject.optString("Title");
@@ -16,9 +17,11 @@ public class Item implements Serializable{
         imageUrl = jsonObject.optString("GalleryURL");
         viewUrl = jsonObject.optString("ViewItemURLForNaturalSearch");
         shipping = "";
+        buyingFormat = jsonObject.optString("ListingType");
+        itemCategory = jsonObject.optString("Title");
+        shippingType = jsonObject.optString("ShippingType");
         JSONObject priceObject = jsonObject.optJSONObject("ConvertedCurrentPrice");
-        price = String.valueOf(priceObject.optLong("Value"))
-                + priceObject.optString("CurrencyID");
+        price = String.valueOf(priceObject.optLong("Value"));
     }
 
     public String getItemId() {
@@ -51,5 +54,45 @@ public class Item implements Serializable{
 
     public void setShipping(String shipping) {
         this.shipping = shipping;
+    }
+
+    public String getViewUrl() {
+        return viewUrl;
+    }
+
+    public void setViewUrl(String viewUrl) {
+        this.viewUrl = viewUrl;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+    }
+
+    public String getBuyingFormat() {
+        return buyingFormat;
+    }
+
+    public void setBuyingFormat(String buyingFormat) {
+        this.buyingFormat = buyingFormat;
+    }
+
+    public String getShippingType() {
+        return shippingType;
+    }
+
+    public void setShippingType(String shippingType) {
+        this.shippingType = shippingType;
     }
 }

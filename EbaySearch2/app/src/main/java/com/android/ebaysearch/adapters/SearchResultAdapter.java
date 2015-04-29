@@ -2,6 +2,7 @@ package com.android.ebaysearch.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +22,12 @@ import java.util.List;
 /**
  * Created by deepaksingh on 26/04/15.
  */
-public class SearchResultAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class SearchResultAdapter extends BaseAdapter {
     private Context context;
-    private ListView listView;
     private List<Item> listItem;
-    public SearchResultAdapter (Context context, ListView listView, List<Item> listItem) {
+    public SearchResultAdapter (Context context, List<Item> listItem) {
         this.context = context;
         this.listItem = listItem;
-        this.listView = listView;
-        listView.setOnItemClickListener(this);
     }
     @Override
     public int getCount() {
@@ -60,19 +58,30 @@ public class SearchResultAdapter extends BaseAdapter implements AdapterView.OnIt
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Item item = listItem.get(position);
+        final Item item = listItem.get(position);
         if (item != null) {
             Picasso.with(context).load(item.getImageUrl()).resize(150, 150).into(holder.imgItemImage);
             holder.lblItemName.setText(item.getItemName());
-            holder.lblPriceShipping.setText(item.getShipping());
+            holder.lblPriceShipping.setText("Price : $ " + item.getPrice());
+
+            holder.lblItemName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent detailIntent = new Intent(context, DetailsActivity.class);
+                    detailIntent.putExtra("ItemDetails", item);
+                    context.startActivity(detailIntent);
+                }
+            });
+
+            holder.imgItemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getViewUrl()));
+                    context.startActivity(browserIntent);
+                }
+            });
         }
         return convertView;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent detailIntent = new Intent(context, DetailsActivity.class);
-        context.startActivity(detailIntent);
     }
 
     public class ViewHolder {

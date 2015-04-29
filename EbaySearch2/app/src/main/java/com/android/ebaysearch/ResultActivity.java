@@ -2,6 +2,7 @@ package com.android.ebaysearch;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,9 +32,7 @@ public class ResultActivity extends ActionBarActivity {
             listItem = itemWrapper.getItemList();
         }
         WeakReference<Context> contextWeakReference = new WeakReference<Context>(this);
-        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(contextWeakReference.get()
-                ,listSearchResult
-                ,listItem);
+        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(contextWeakReference.get(),listItem);
         listSearchResult.setAdapter(searchResultAdapter);
     }
 
@@ -53,6 +52,12 @@ public class ResultActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

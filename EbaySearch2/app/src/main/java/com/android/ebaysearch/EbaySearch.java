@@ -83,6 +83,7 @@ public class EbaySearch extends ActionBarActivity implements View.OnClickListene
             case R.id.btn_search:
                 boolean result = validateSelections();
                 if (result) {
+                    lblErrorMessage.setText("");
                     initiateSearch();
                 }
                 break;
